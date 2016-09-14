@@ -1,0 +1,25 @@
+<?php /** @var $this \Messenger\Model\Core\View */?>
+
+<div id="init_block">
+    <h3>Create User</h3>
+    <form method="post" action="<?php echo $this->getUrl()->crete('user', 'saveCreate'); ?>">
+        <div class="input-group">
+            <div class="input-sm">
+                <label for="login">Login: </label>
+                <input id="login" type="text" name="login" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="first_name">First Name: </label>
+                <input id="first_name" type="text" name="first_name" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="last_name">Last Name: </label>
+                <input id="last_name" type="text" name="last_name" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="is_admin">Is Admin: </label>
+                <input id="is_admin" type="checkbox" name="is_admin">
+            </div>
+            <input type="submit" value="Create">
+    </form>
+</div>

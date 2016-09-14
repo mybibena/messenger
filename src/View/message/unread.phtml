@@ -1,0 +1,11 @@
+<?php /** @var $this \Messenger\Model\Core\View */?>
+
+<div id="unread_message_block">
+    <h3>Unread Messages Chains</h3>
+    <?php foreach($messages as $message) : ?>
+        <div class="message" style="margin-top: 20px;">
+            <div><?php echo $message['name']; ?></div>
+            <div><a href="<?php echo $this->getUrl()->crete('message', 'index', ['sender' => $message['receiver'], 'receiver' => $message['sender']])?>"><?php echo $message['count']; ?></a></div>
+        </div>
+    <?php endforeach; ?>
+</div>

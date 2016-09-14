@@ -1,0 +1,89 @@
+<?php /** @var $this \Messenger\Model\Core\View */?>
+
+<div id="users">
+    <div>
+        <div style="float: left;"><h3>Users</h3></div>
+        <?php if ($this->getUser()['is_admin']) : ?>
+            <div style="float: left; margin-left: 20px; line-height: 70px;"><a href="<?php echo $this->getUrl()->crete('user', 'create'); ?>">Create</a></div>
+        <?php endif; ?>
+    </div>
+    <div>
+        <div style="float: left; clear: both; margin-bottom: 20px;">
+            <span>You have
+                <span class="unreadAmountZero" <?php echo $unreadMessagesAmount == 0 ? '' : 'style="display: none;"'; ?>>0</span>
+                <span class="unreadAmountNonZero" <?php echo $unreadMessagesAmount != 0 ? '' : 'style="display: none;"'; ?>>
+                    <a href="<?php echo $this->getUrl()->crete('message', 'showUnread'); ?>"><?php echo $unreadMessagesAmount; ?></a>
+                </span> unread messages</span>
+            <a class="refresh">Refresh</a>
+        </div>
+
+        <?php if (count($users) == 1) : ?>
+            <div>There are no users except you</div>
+        <?php else : ?>
+            <div style="float: left; clear: both;">
+                <div style="float: left; width: 200px;">User</div>
+                <div style="float: left; margin-left: 20px;">Actions</div>
+            </div>
+            <?php /** @var $users array */?>
+            <?php foreach($users as $user) : ?>
+                <?php if ($user['id'] == $this->getUser()['id']) : ?>
+                    <?php continue; ?>
+                <?php endif; ?>
+                <div style="float: left; clear: both; margin-top: 10px;">
+                    <div style="float: left; width: 200px;"><?php echo $user['first_name']; ?> <?php echo $user['last_name']; ?></div>
+                    <div style="float: left; margin-left: 20px;">
+                        <div><a href="<?php echo $this->getUrl()->crete('message', 'index', ['sender' => $this->getUser()['id'], 'receiver' => $user['id']]); ?>">Message History</a></div>
+                        <div><a href="<?php echo $this->getUrl()->crete('message', 'index', ['sender' => $this->getUser()['id'], 'receiver' => $user['id']]); ?>">Send Message</a></div>
+                        <?php if ($this->getUser()['is_admin']) : ?>
+                            <div><a href="<?php echo $this->getUrl()->crete('user', 'edit', ['user' => $user['id']]); ?>">Edit</a></div>
+                            <div><a href="<?php echo $this->getUrl()->crete('user', 'delete', ['user' => $user['id']]); ?>">Delete</a></div>
+                            <div><a href="<?php echo $this->getUrl()->crete('user', 'setDefaultPassword', ['user' => $user['id']]); ?>">Set Default Password</a></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>
+
+<script>
+    function showUnreadAmountZero()
+    {
+        $('.unreadAmountZero').show();
+        $('.unreadAmountNonZero').hide();
+    }
+
+    function showUnreadAmountNonZero()
+    {
+        $('.unreadAmountNonZero').show();
+        $('.unreadAmountZero').hide();
+    }
+
+    function changeUnreadAmount()
+    {
+        $.get('<?php echo $this->getUrl()->crete('message', 'getUnreadMessagesAmount'); ?>',
+            {},
+            function(data) {
+                var unreadAmount = data.unread;
+
+                if (unreadAmount > 0) {
+                    $('.unreadAmountNonZero a').text(unreadAmount);
+                    showUnreadAmountNonZero();
+                } else {
+                    showUnreadAmountZero();
+                }
+            },
+            'json');
+    }
+
+    $(document).on('click','.refresh', function() {
+        changeUnreadAmount();
+    });
+
+    $(function() {
+        setTimeout(function() {
+            changeUnreadAmount();
+        }, 1000 * 60 * 10)
+
+    });
+</script>

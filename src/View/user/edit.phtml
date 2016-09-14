@@ -1,0 +1,18 @@
+<?php /** @var $this \Messenger\Model\Core\View */?>
+
+<div id="init_block">
+    <h3>Profile</h3>
+    <form method="post" action="<?php echo $this->getUrl()->crete('user', 'saveEdit'); ?>">
+        <div class="input-group">
+            <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+            <div class="input-sm">
+                <label for="first_name">First Name: </label>
+                <input id="first_name" type="text" name="first_name" value="<?php echo $user['first_name']; ?>" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="last_name">Last Name: </label>
+                <input id="last_name" type="text" name="last_name" value="<?php echo $user['last_name']; ?>" required="required">
+            </div>
+            <input type="submit" value="Save">
+    </form>
+</div>

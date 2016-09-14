@@ -1,0 +1,60 @@
+<?php /** @var $this \Messenger\Model\Core\View */?>
+
+<div id="init_block">
+    <h3>Initialization Configs</h3>
+    <form method="post" action="<?php echo $this->getUrl()->crete('init', 'save'); ?>">
+        <div class="input-group">
+            <div class="input-sm">
+                <label for="database_host">Database Host: </label>
+                <input id="database_host" type="text" name="database_host" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="database_port">Database Port: </label>
+                <input id="database_port" type="text" name="database_port" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="database_name">Database Name: </label>
+                <input id="database_name" type="text" name="database_name" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="database_user">Database User: </label>
+                <input id="database_user" type="text" name="database_user" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="database_password">Database Password: </label>
+                <input id="database_password" type="text" name="database_password" required="required">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-sm">
+                <label for="admin_login">Admin Login: </label>
+                <input id="admin_login" type="text" name="admin_login" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="admin_password">Admin Password: </label>
+                <input id="admin_password" type="password" name="admin_password" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="admin_first_name">Admin First Name: </label>
+                <input id="admin_first_name" type="text" name="admin_first_name" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="admin_last_name">Admin Last Name: </label>
+                <input id="admin_last_name" type="text" name="admin_last_name" required="required">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-sm">
+                <label for="default_user_password">Default User Password: </label>
+                <input id="default_user_password" type="password" name="default_user_password" required="required">
+            </div>
+        </div>
+        <input type="submit" value="Save">
+    </form>
+</div>
+
+<style>
+    label {
+        width: 150px !important;
+    }
+</style>

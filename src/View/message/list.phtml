@@ -1,0 +1,28 @@
+<?php /** @var $this \Messenger\Model\Core\View */?>
+
+<div id="create_message_block">
+    <h3>Messages</h3>
+    <form method="post" action="<?php echo $this->getUrl()->crete('message', 'createMessage'); ?>">
+        <input type="hidden" name="sender_id" value="<?php echo $sender['id']; ?>">
+        <input type="hidden" name="receiver_id" value="<?php echo $receiver['id']; ?>">
+        <div class="input-group">
+            <div class="input-sm">
+                <label for="login">Message: </label>
+                <textarea id="login" name="text" required="required"></textarea>
+            </div>
+            <input type="submit" style="margin-top: 50px;" value="Send">
+    </form>
+</div>
+<div id="messages_block">
+    <?php foreach($messages as $message) : ?>
+        <?php if ($message['sender'] == $sender['id']) : ?>
+            <?php $name = "{$sender['first_name']} {$sender['last_name']}"; ?>
+        <?php elseif ($message['sender'] == $receiver['id']) : ?>
+            <?php $name = "{$receiver['first_name']} {$receiver['last_name']}"; ?>
+        <?php endif; ?>
+        <div class="message" style="margin-top: 20px;">
+            <div><?php echo $name; ?> (<?php echo $message['create_date']; ?>): </div>
+            <div><?php echo $message['text']; ?></div>
+        </div>
+    <?php endforeach; ?>
+</div>

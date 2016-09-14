@@ -1,0 +1,14 @@
+body {
+    padding-top: 50px;
+}
+label {
+    width: 100px;;
+}
+input[type='submit'] {
+    margin-left: 112px;
+    margin-top: 10px;
+}
+.refresh {
+    margin-left: 20px;
+    cursor: pointer;
+}

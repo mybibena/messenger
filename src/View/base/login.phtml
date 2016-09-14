@@ -1,0 +1,17 @@
+<?php /** @var $this \Messenger\Model\Core\View */?>
+
+<div id="init_block">
+    <h3>Login Page</h3>
+    <form method="post" action="<?php echo $this->getUrl()->crete('login', 'check'); ?>">
+        <div class="input-group">
+            <div class="input-sm">
+                <label for="login">Login: </label>
+                <input id="login" type="text" name="login" required="required">
+            </div>
+            <div class="input-sm">
+                <label for="password">Password: </label>
+                <input id="password" type="password" name="password" required="required">
+            </div>
+        <input type="submit" value="Login">
+    </form>
+</div>
